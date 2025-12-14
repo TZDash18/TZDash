@@ -586,6 +586,101 @@
   color:var(--teal);
 }
 
+
+/* ---------------------------
+   Mobile Navigation
+--------------------------- */
+.menuBtn{
+  display:none;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.18);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+  backdrop-filter: blur(10px);
+}
+.menuBtn:hover{background:rgba(255,255,255,.24)}
+.menuBtn:active{transform:translateY(1px)}
+.menuIcon{font-size:18px; line-height:1}
+.menuText{font-size:14px; letter-spacing:.2px}
+
+.mobileMenu{
+  position:fixed;
+  inset:0;
+  z-index:1200;
+  display:none;
+}
+.mobileMenu[aria-hidden="false"]{display:block}
+.mobileBackdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.35);
+}
+.mobilePanel{
+  position:absolute;
+  top:0;
+  right:0;
+  width:min(88vw, 360px);
+  height:100%;
+  background:rgba(255,255,255,.98);
+  padding:18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.mobileTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.mobileTitle{
+  font-weight:1000;
+  letter-spacing:.2px;
+  color: rgba(36,50,65,.92);
+}
+.mobileClose{
+  width:40px;
+  height:40px;
+  border-radius:14px;
+  border:1px solid rgba(10,20,30,.08);
+  background:rgba(4,171,179,.08);
+  color:rgba(36,50,65,.85);
+  font-weight:900;
+  cursor:pointer;
+}
+.mobileLinks{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.mobileLinks a{
+  padding:12px 12px;
+  border-radius:14px;
+  font-weight:900;
+  color: rgba(36,50,65,.86);
+  border:1px solid rgba(10,20,30,0.08);
+  background: rgba(4,171,179,0.06);
+}
+.mobileLinks a:hover{ background: rgba(4,171,179,0.12); }
+.mobileNote{
+  margin-top:auto;
+  font-size:12px;
+  color: rgba(36,50,65,.62);
+}
+
+@media (max-width: 980px){
+  .links{ display:none !important; }
+  .menuBtn{ display:inline-flex; }
+  .nav{ padding:10px 0; }
+  .brand img{ height:44px; }
+}
+
 </style>
 </head>
 
@@ -594,8 +689,13 @@
   <div class="container">
     <div class="nav">
       <a class="brand" href="#home" aria-label="TZ Dash home">
-        <span id="brandFallback" style="display:none;color:#fff;font-weight:900;letter-spacing:-0.02em;">TZ Dash</span><img src="./Logo.png" alt="TZ Dash logo" onerror="this.style.display=\'none\';document.getElementById(\'brandFallback\').style.display=\'inline\';">
+        <span id="brandFallback" style="display:none;color:#fff;font-weight:900;letter-spacing:-0.02em;">TZ Dash</span><img src="Logo.png" alt="TZ Dash logo" onerror="this.style.display=\'none\';document.getElementById(\'brandFallback\').style.display=\'inline\';">
       </a>
+
+      <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="menuIcon" aria-hidden="true">☰</span>
+        <span class="menuText">Menu</span>
+      </button>
 
       <nav class="links" aria-label="Primary navigation">
         <a href="#home">Home</a>
@@ -717,28 +817,28 @@
         <h3>🛠️ Work Order Performance</h3>
         <p>Technician efficiency, labor cost, task performance, and operational insights.</p>
         <div class="spacer"></div>
-        <a class="btn btn-primary" data-pdf href="WorkOrder.pdf" download="WorkOrder.pdf">Download PDF</a>
+        <a class="btn btn-primary" data-pdf href="./WorkOrder.pdf" download>Download PDF</a>
       </div>
 
       <div class="card report">
         <h3>🏢 Rental Operations</h3>
         <p>Revenue, profit, ROI, customer insights, and equipment utilization.</p>
         <div class="spacer"></div>
-        <a class="btn btn-primary" data-pdf href="Rental.pdf" download="Rental.pdf">Download PDF</a>
+        <a class="btn btn-primary" data-pdf href="./Rental.pdf" download>Download PDF</a>
       </div>
 
       <div class="card report">
         <h3>🍽️ Restaurant Performance</h3>
         <p>Sales trends, demand vs forecast, suppliers, and product metrics.</p>
         <div class="spacer"></div>
-        <a class="btn btn-primary" data-pdf href="Restaurant.pdf" download="Restaurant.pdf">Download PDF</a>
+        <a class="btn btn-primary" data-pdf href="./Restaurant.pdf" download>Download PDF</a>
       </div>
 
       <div class="card report">
         <h3>🚚 Transportation Optimization</h3>
         <p>On-time delivery, utilization, cost optimization, and fleet performance.</p>
         <div class="spacer"></div>
-        <a class="btn btn-primary" data-pdf href="Transportation.pdf" download="Transportation.pdf">Download PDF</a>
+        <a class="btn btn-primary" data-pdf href="./Transportation.pdf" download>Download PDF</a>
       </div>
     </div>
 
@@ -1073,10 +1173,12 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Ensure PDF hrefs are URL-safe (spaces) for GitHub Pages
+  // Ensure PDF hrefs are URL-safe (spaces) and open reliably on GitHub Pages
   document.querySelectorAll('a[data-pdf]').forEach(a => {
     const raw = a.getAttribute('href') || '';
     a.setAttribute('href', encodeURI(raw));
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener');
   });
 
   // Contact -> opens email draft
@@ -1152,6 +1254,43 @@
 
     document.addEventListener('keydown', (e)=>{
       if(e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
+    });
+  })();
+</script>
+
+
+<script>
+  (function () {
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    if (!btn || !menu) return;
+
+    const openMenu = () => {
+      menu.setAttribute('aria-hidden', 'false');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeMenu = () => {
+      menu.setAttribute('aria-hidden', 'true');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+
+    btn.addEventListener('click', () => {
+      const isOpen = menu.getAttribute('aria-hidden') === 'false';
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    menu.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t && t.getAttribute && t.getAttribute('data-close') === 'true') closeMenu();
+      // clicking any link closes the menu
+      if (t && t.tagName === 'A') closeMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
     });
   })();
 </script>
