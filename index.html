@@ -608,71 +608,48 @@
 .menuIcon{font-size:18px; line-height:1}
 .menuText{font-size:14px; letter-spacing:.2px}
 
-.mobileMenu{
-  position:fixed;
-  inset:0;
-  z-index:1200;
-  display:none;
+
+.mobileOnly{display:none;}
+@media (max-width: 860px){
+  .navLinks{display:none;}
+  .mobileOnly{display:inline-flex;}
 }
-.mobileMenu[aria-hidden="false"]{display:block}
-.mobileBackdrop{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.35);
-}
+
+/* Mobile dropdown menu (clickable) */
+.mobileMenu{position:fixed; inset:0; z-index:2000; display:block;}
+.mobileMenu[hidden]{display:none;}
+.mobileBackdrop{position:fixed; inset:0; background:rgba(0,0,0,.0); border:0; padding:0; margin:0; z-index:2000;}
 .mobilePanel{
-  position:absolute;
-  top:0;
-  right:0;
-  width:min(88vw, 360px);
-  height:100%;
-  background:rgba(255,255,255,.98);
-  padding:18px;
-  box-shadow: 0 20px 60px rgba(0,0,0,.25);
-  display:flex;
-  flex-direction:column;
-  gap:14px;
+  position:fixed;
+  top:calc(var(--headerH) + 10px);
+  right:14px;
+  width:min(320px, calc(100vw - 28px));
+  background:linear-gradient(135deg, rgba(8,171,175,0.98), rgba(49,191,198,0.98));
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:18px;
+  padding:14px;
+  box-shadow:0 18px 60px rgba(0,0,0,.18);
+  transform:translateY(-10px);
+  opacity:0;
+  pointer-events:none;
+  z-index:2001;
 }
-.mobileTop{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-.mobileTitle{
-  font-weight:1000;
+.mobileMenu.open .mobilePanel{transform:translateY(0); opacity:1; pointer-events:auto;}
+.mobileLink{
+  display:block;
+  width:100%;
+  text-decoration:none;
+  color:#ffffff;
+  font-weight:800;
+  font-size:16px;
   letter-spacing:.2px;
-  color: rgba(36,50,65,.92);
-}
-.mobileClose{
-  width:40px;
-  height:40px;
-  border-radius:14px;
-  border:1px solid rgba(10,20,30,.08);
-  background:rgba(4,171,179,.08);
-  color:rgba(36,50,65,.85);
-  font-weight:900;
-  cursor:pointer;
-}
-.mobileLinks{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-.mobileLinks a{
   padding:12px 12px;
   border-radius:14px;
-  font-weight:900;
-  color: rgba(36,50,65,.86);
-  border:1px solid rgba(10,20,30,0.08);
-  background: rgba(4,171,179,0.06);
 }
-.mobileLinks a:hover{ background: rgba(4,171,179,0.12); }
-.mobileNote{
-  margin-top:auto;
-  font-size:12px;
-  color: rgba(36,50,65,.62);
-}
+.mobileLink:active{transform:scale(0.99);}
+.mobileLink:hover{background:rgba(255,255,255,.12);}
+.mobileHint{margin-top:8px; color:rgba(255,255,255,.85); font-size:12px; padding:0 12px 6px;}
+
 
 @media (max-width: 980px){
   .links{ display:none !important; }
@@ -711,23 +688,18 @@
 </header>
 
 <!-- Mobile menu overlay (shown on small screens) -->
-<div class="mobileMenu" id="mobileMenu" hidden>
-  <div class="mobileBackdrop" data-close aria-hidden="true"></div>
-  <div class="mobileMenuPanel" role="dialog" aria-modal="true" aria-label="Site menu">
-    <div class="mobileTop">
-      <div class="mobileTitle">TZ Dash</div>
-      <button class="mobileClose" type="button" data-close aria-label="Close menu">✕</button>
-    </div>
-    <nav class="mobileLinks" aria-label="Mobile navigation">
-      <a href="#home">Home</a>
-      <a href="#about">About TZ Dash</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="mobileNote">Tap a section to jump.</div>
+
+<div class="mobileMenu" id="mobileMenu" hidden aria-hidden="true">
+  <button class="mobileBackdrop" type="button" aria-label="Close menu"></button>
+  <div class="mobilePanel" role="menu" aria-label="Mobile navigation">
+    <a class="mobileLink" href="#home">Home</a>
+    <a class="mobileLink" href="#about">About TZ Dash</a>
+    <a class="mobileLink" href="#portfolio">Portfolio</a>
+    <a class="mobileLink" href="#services">Services</a>
+    <a class="mobileLink" href="#process">Process</a>
+    <a class="mobileLink" href="#pricing">Pricing</a>
+    <a class="mobileLink" href="#contact">Contact</a>
+    <div class="mobileHint">Tap a section to jump.</div>
   </div>
 </div>
 
@@ -1251,32 +1223,76 @@
 
 <script>
   (function(){
-    const modal = document.getElementById('pdfModal');
-    const frame = document.getElementById('pdfFrame');
-    const title = document.getElementById('pdfModalTitle');
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if(!menuBtn || !mobileMenu) return;
 
-    window.openPdfPreview = function(url, label){
-      if(!modal) return window.open(url, '_blank');
-      frame.src = url;
-      title.textContent = label ? ('Preview — ' + label) : 'Preview';
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-    }
+  const backdrop = mobileMenu.querySelector('.mobileBackdrop');
+  const panel = mobileMenu.querySelector('.mobilePanel');
+  const links = mobileMenu.querySelectorAll('a.mobileLink');
 
-    function closeModal(){
-      modal.setAttribute('aria-hidden','true');
-      frame.src = '';
-      document.body.style.overflow = '';
-    }
+  function openMenu(){
+    mobileMenu.hidden = false;
+    mobileMenu.setAttribute('aria-hidden','false');
+    mobileMenu.classList.add('open');
+    menuBtn.setAttribute('aria-expanded','true');
+  }
 
-    modal.addEventListener('click', (e)=>{
-      if(e.target && e.target.dataset && e.target.dataset.close === "1") closeModal();
+  function closeMenu(){
+    mobileMenu.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded','false');
+    mobileMenu.setAttribute('aria-hidden','true');
+    // Wait for fade to finish before hiding (prevents click-through issues)
+    window.setTimeout(()=>{ mobileMenu.hidden = true; }, 120);
+  }
+
+  function toggleMenu(e){
+    e && e.preventDefault();
+    if(mobileMenu.hidden) openMenu(); else closeMenu();
+  }
+
+  menuBtn.addEventListener('click', toggleMenu);
+
+  backdrop && backdrop.addEventListener('click', closeMenu);
+
+  // Close on link tap + smooth-scroll with header offset
+  links.forEach(a=>{
+    a.addEventListener('click', (ev)=>{
+      const href = a.getAttribute('href') || '';
+      if(href.startsWith('#')){
+        ev.preventDefault();
+        const id = href.slice(1);
+        const el = document.getElementById(id);
+        closeMenu();
+        if(el){
+          const y = el.getBoundingClientRect().top + window.pageYOffset - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--headerH')) || 72) - 10;
+          window.scrollTo({top:y, behavior:'smooth'});
+          history.replaceState(null,'',href);
+        }
+      } else {
+        closeMenu();
+      }
     });
+  });
 
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
-    });
-  })();
+  // Close when tapping outside the panel
+  document.addEventListener('click', (e)=>{
+    if(mobileMenu.hidden) return;
+    if(e.target === menuBtn || menuBtn.contains(e.target)) return;
+    if(panel && (panel === e.target || panel.contains(e.target))) return;
+    closeMenu();
+  });
+
+  // Close on ESC
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && !mobileMenu.hidden) closeMenu();
+  });
+
+  // Ensure state on resize (if user rotates / expands)
+  window.addEventListener('resize', ()=>{
+    if(window.innerWidth > 860 && !mobileMenu.hidden) closeMenu();
+  });
+})();;
 </script>
 
 
