@@ -395,9 +395,9 @@
     /* Contact */
     .contact-wrap {
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 0.95fr 1.05fr;
       gap: 16px;
-      align-items:stretch;
+      align-items:start;
     }
     .panel {
       background: rgba(255,255,255,0.88);
@@ -658,15 +658,6 @@
   .brand img{ height:44px; }
 }
 
-
-    /* Contact panel alignment */
-    .contact-wrap .panel{ height:100%; display:flex; flex-direction:column; }
-    .contact-wrap form{ flex:1; display:flex; flex-direction:column; }
-    .contact-wrap form .btn{ margin-top:auto; }
-    .sharelist{ margin:10px 0 0 18px; padding:0; color: var(--muted); font-weight:600; line-height:1.7; }
-    .sharelist li{ margin: 2px 0; }
-    .subcap{ margin-top: 12px; font-size: 12.5px; font-weight: 900; color: rgba(36,50,65,0.85); }
-    .chiprow{ margin-top: 10px; }
 </style>
 </head>
 
@@ -736,8 +727,8 @@
                 <path d="M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path>
               </svg>
             </div>
-            <h3>Report Strategy</h3>
-            <p>We clarify your KPIs, audiences, and what decisions the report should drive — then design the layout to match.</p>
+            <h3>Data Foundations</h3>
+            <p>We connect to your ERP, CRM, or cloud databases and extract raw data.</p>
           </div>
 
           <div class="card">
@@ -752,8 +743,8 @@
                 <path d="M6 9h5"></path>
               </svg>
             </div>
-            <h3>Power BI Model &amp; DAX</h3>
-            <p>We build measures, relationships, and calculations inside Power BI — assuming you already have a usable dataset/model.</p>
+            <h3>Business Logic &amp; Modelling</h3>
+            <p>We shape and clean the data, build your semantic model, and define measures.</p>
           </div>
 
           <div class="card">
@@ -764,8 +755,8 @@
                 <path d="M12 9v6"></path>
               </svg>
             </div>
-            <h3>Power BI Service Delivery</h3>
-            <p>We publish, secure, and support your report in Power BI Service (refresh, permissions, RLS, apps) so it’s ready for users.</p>
+            <h3>Visualize Analytics</h3>
+            <p>We create interactive dashboards that make KPIs obvious, actionable, and fast.</p>
           </div>
         </div>
       </div>
@@ -785,10 +776,7 @@
     <div class="card service">
       <h3>👤 Profile</h3>
       <p>
-        TZ Dash is led by a Power BI Developer with <b>5+ years of experience</b> building executive-ready dashboards across multiple industries. Our specialty is the <b>last mile of analytics</b>: turning your existing data (already available in SQL/Snowflake/Excel or a prepared dataset/model) into fast, beautiful Power BI reports your leadership team actually uses.
-
-<b>What we do:</b> Power BI report design, DAX/semantic modelling inside the report, performance tuning, and <b>Power BI Service</b> deployment (workspaces, refresh, permissions, RLS, and apps).<br/>
-<b>What we don’t do (unless separately scoped):</b> data ingestion, ETL pipelines, warehousing, or analytics engineering. If you have a data team, we plug in seamlessly; if not, we’ll help you define what “Power BI-ready” data looks like so your team (or a partner) can deliver it.
+        TZ Dash represents a passionate Power BI Developer with 2+ years of on-going experience in the financial startup sector building dashboards across a multitude of clients. TZ Dash understands the pain points of outdated data solutions and focuses on telling the story your data holds that drives the business. With our robust expertise in <b>Power BI Reporting</b> &amp; <b>Power BI Service Integration</b>, we can guarantee the speed of your business will thrive with our zooming analytics. You'll get founder-friendly dashboards that ship quickly, load fast, and answer the right business questions.
       </p>
       <div class="chiprow">
         <span class="chip">Power BI Reports</span>
@@ -869,7 +857,7 @@
     <div class="section-head">
       <div>
         <h2>🛠 Services</h2>
-        <p>TZ Dash focuses on Power BI report build + Power BI Service delivery. We assume your data is already available in a Power BI-ready format (or we’ll define what’s needed for your team to provide it).</p>
+        <p>Here’s our style of work that puts the client first.</p>
       </div>
     </div>
 
@@ -882,7 +870,7 @@
 
       <div class="card service">
         <h3><span class="stepnum">2</span>📥 Data readiness</h3>
-        <p>Confirm your dataset/model is Power BI-ready (tables, keys, grain, and definitions). Transformations are kept light unless separately scoped.</p>
+        <p>Confirm ingestion and Power BI-ready structure. Transformations are kept light unless separately scoped.</p>
         <div class="chiprow"><span class="chip">Connections</span><span class="chip">Validation</span><span class="chip">Light Power Query</span></div>
       </div>
 
@@ -921,8 +909,8 @@
       <div class="subhead">Support & scope (included)</div>
       <div class="subgrid">
       <div class="card service subcard">
-        <h3>🧰 Support mode (2 weeks)</h3>
-        <p>Support lasts <b>2 weeks</b> after final delivery (bug fixes + minor tweaks). Beyond that, continued work is paid.</p>
+        <h3>🧰 Support mode (3 weeks)</h3>
+        <p>Support lasts <b>3 weeks</b> after final delivery (bug fixes + minor tweaks). Beyond that, continued work is paid.</p>
       </div>
       <div class="card service subcard">
         <h3>✅ Clear scope</h3>
@@ -938,7 +926,7 @@
     <div class="section-head">
       <div>
         <h2>🔁 Process</h2>
-        <p>A clear, client-first flow — from prepared data to decision-ready dashboards.</p>
+        <p>A clear, client-first flow — from raw data to decision-ready dashboards.</p>
       </div>
     </div>
 
@@ -951,7 +939,7 @@
             <path d="M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path>
           </svg>
         </div>
-        <div class="plabel">Power BI‑ready data</div>
+        <div class="plabel">Raw Data</div>
       </div>
 
       <div class="pstep" role="listitem">
@@ -1026,35 +1014,34 @@
     <div class="section-head">
       <div>
         <h2>💳 Pricing</h2>
-        <p>Packages in CAD for Power BI report delivery (the last mile). Final pricing depends on scope, KPI complexity, and how “ready” the dataset is.</p>
+        <p>Starting points in CAD. Final scope depends on data sources, KPI complexity, and timeline.</p>
       </div>
     </div>
 
     <div class="pricing-grid">
       <div class="card pricing-card">
         <div style="font-weight:900; color:rgba(36,50,65,0.92);">⚡ Starter Dash</div>
-        <div class="price">$3,500 <span style="font-size:12px;color:var(--muted);font-weight:850;">starting</span></div>
+        <div class="price">$2,000 <span style="font-size:12px;color:var(--muted);font-weight:850;">starting</span></div>
         <ul class="features">
-          <li>1–2 sources (or a curated dataset/model)</li>
-          <li>2–4 pages</li>
-          <li>Core KPIs + light DAX</li>
-          <li>Publish to Power BI Service (workspace + refresh setup)</li>
-          <li>Handoff + recorded walkthrough</li>
-          <li>Timeline: ~2–3 weeks</li>
+          <li>1 data source (or curated extract)</li>
+          <li>1–3 pages</li>
+          <li>Basic KPIs + light DAX</li>
+          <li>Publish to Power BI Service</li>
+          <li>Timeline: ~2–4 weeks</li>
         </ul>
         <div class="spacer"></div>
         <div class="btnrow"><a class="btn btn-primary" href="#contact">Request Starter</a></div>
       </div>
 
       <div class="card pricing-card" style="border: 1px solid rgba(4,171,179,0.24);">
-        <div style="font-weight:900; color:rgba(36,50,65,0.92);">🚀 Growth Dash <span class="badge-pop">Most Popular</span></div>
-        <div class="price">$7,500 <span style="font-size:12px;color:var(--muted);font-weight:850;">starting</span></div>
+        <div style="font-weight:900; color:rgba(36,50,65,0.92);">📈 Growth Dash <span class="badge-pop">Most Popular!</span></div>
+        <div class="price">$4,500 <span style="font-size:12px;color:var(--muted);font-weight:850;">starting</span></div>
         <ul class="features">
-          <li>Up to 3–5 sources (or multiple curated extracts)</li>
-          <li>4–6 pages + drill-through</li>
-          <li>Semantic model + stronger DAX layer</li>
-          <li>Bookmarks/tooltips + consistent design system</li>
-          <li>Refresh + basic RLS + app publishing</li>
+          <li>2–3 sources</li>
+          <li>Up to 5 pages + drill-through</li>
+          <li>Semantic model + DAX layer</li>
+          <li>Bookmarks/tooltips + consistent design</li>
+          <li>Refresh + basic RLS</li>
           <li>Timeline: ~4–6 weeks</li>
         </ul>
         <div class="spacer"></div>
@@ -1062,19 +1049,18 @@
       </div>
 
       <div class="card pricing-card">
-        <div style="font-weight:900; color:rgba(36,50,65,0.92);">🏆 Executive Suite</div>
-        <div class="price">$12,500 <span style="font-size:12px;color:var(--muted);font-weight:850;">starting</span></div>
+        <div style="font-weight:900; color:rgba(36,50,65,0.92);">📊 Full Dash</div>
+        <div class="price">$6,500 <span style="font-size:12px;color:var(--muted);font-weight:850;">starting</span></div>
         <ul class="features">
-          <li>Multi-stakeholder dashboard suite</li>
-          <li>6–10 pages, multiple audiences</li>
-          <li>Performance tuning + best-practice modelling</li>
-          <li>RLS strategy + governance recommendations</li>
-          <li>Power BI Service rollout (apps, audiences, permissions)</li>
-          <li>Team training + documentation</li>
-          <li>Timeline: ~6–10 weeks</li>
+          <li>3–6 sources + simple transformations only</li>
+          <li>6–10 pages + deeper slicing</li>
+          <li>Performance tuning + measure layer</li>
+          <li>RLS roles + workspace governance</li>
+          <li>Documentation + training session</li>
+          <li>Timeline: ~6–8 weeks</li>
         </ul>
         <div class="spacer"></div>
-        <div class="btnrow"><a class="btn btn-primary" href="#contact">Request Suite</a></div>
+        <div class="btnrow"><a class="btn btn-primary" href="#contact">Request Full</a></div>
       </div>
     </div>
 
@@ -1082,23 +1068,18 @@
 
     <div class="grid2">
       <div class="card service">
-        <h3>🧯 Ongoing Support</h3>
-        <p><b>$150/hr</b> for tweaks, new visuals, measure updates, and release management for previously delivered dashboards (after the included support window). Retainers available for teams that want a predictable monthly cadence.</p>
+        <h3>🧯 Extended Dash Support</h3>
+        <p><b>$120/hr</b> for small support items and tweaks to already delivered dashboards (after the included 3-week support mode).</p>
       </div>
       <div class="card service">
         <h3>🏋️ Heavy Dash</h3>
-        <p>For larger scope (multi-report programs, complex security, enterprise governance, or tight timelines), pricing is custom. Contact TZ Dash for scoping, implementation approach, and a fixed-price proposal.</p>
+        <p>For larger scope, integrations, or multi-report suites: contact TZ Dash for scoping, implementation approach, and pricing.</p>
         <div style="height:10px"></div>
         <a class="btn btn-ghost" href="#contact">Contact for heavy scope</a>
       </div>
     </div>
-
-    <p class="hint" style="margin-top:14px;">
-      <b>Important:</b> TZ Dash focuses on report build + Power BI Service. Data engineering / ETL / warehousing is not included unless explicitly scoped and priced separately.
-    </p>
   </div>
 </section>
-
 
 <section id="contact">
   <div class="container">
@@ -1113,14 +1094,7 @@
       <div class="panel">
         <div style="font-weight:900; color:rgba(36,50,65,0.92); margin-bottom:8px;">Fastest way to start ⚡</div>
         <div class="hint" style="margin-top:0;">
-          Share:
-          <ol class="sharelist">
-            <li>Goal / questions to answer</li>
-            <li>Where the data lives (systems + owners)</li>
-            <li>Who uses the dashboard (audiences)</li>
-            <li>KPI priorities + definitions</li>
-            <li>Timeline / deadline</li>
-          </ol>
+          Share: (1) goal, (2) where data lives, (3) who uses the dashboard, (4) KPI priorities, (5) timeline.
         </div>
 
         <div class="card service" style="box-shadow:none; padding:16px;">
@@ -1129,22 +1103,6 @@
           <div class="chiprow">
             <span class="chip">Remote</span><span class="chip">Montreal</span><span class="chip">English/French</span>
           </div>
-          <div class="subcap">Common data sources</div>
-          <div class="chiprow">
-            <span class="chip">📊 Microsoft Excel</span>
-            <span class="chip">❄️ Snowflake</span>
-            <span class="chip">🧱 Databricks</span>
-            <span class="chip">🗄️ SQL</span>
-            <span class="chip">🟦 Azure SQL</span>
-            <span class="chip">🐬 MySQL</span>
-            <span class="chip">🐘 Postgres</span>
-            <span class="chip">☁️ Google Sheets</span>
-            <span class="chip">🧑‍💼 Salesforce</span>
-            <span class="chip">🧩 Dynamics 365</span>
-            <span class="chip">🧰 HubSpot</span>
-            <span class="chip">🛒 Shopify</span>
-          </div>
-
         </div>
       </div>
 
@@ -1181,7 +1139,11 @@
             If your mail app doesn’t open, email directly:
             <a href="mailto:tzdash18@gmail.com" style="text-decoration:underline;">tzdash18@gmail.com</a>
           </div>
-        </form>
+        
+<input type="hidden" name="_subject" value="New TZDash Business Inquiry">
+<input type="hidden" name="_captcha" value="false">
+
+</form>
       </div>
     </div>
   </div>
